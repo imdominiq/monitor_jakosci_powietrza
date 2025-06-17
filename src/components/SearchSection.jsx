@@ -14,9 +14,10 @@ const defaultCities = [
 const SearchSection = ({onCitySelect}) => {
   const [query, setQuery] = useState('');
   const [suggestions, setSuggestions] = useState([]);
+  const [showSuggestions, setShowSuggestions] = useState(false); 
 
   useEffect(() => {
-  if (query.length === 0) {
+  if (query.trim() === '') {
     setSuggestions([]);
     return;
   }
@@ -40,22 +41,29 @@ const SearchSection = ({onCitySelect}) => {
     city.toLowerCase().startsWith(query.toLowerCase())
   );
   setSuggestions(filtered);
+  setShowSuggestions(true);
   }, [query]);
 
   const handleInputChange = (e) => {
     setQuery(e.target.value);
   };
 
-  const handleSelectSuggestion = (city) => {
-    setQuery(city);
-    setSuggestions([]);
-    onCitySelect(city);
+   const handleSelectSuggestion = (city) => {
+    setQuery(city);                 
+    setSuggestions([]);   
+    setShowSuggestions(false);           // ✅ natychmiast ukrywa listę
+    onCitySelect(city);             
   };
 
   const handleCitySearch = (e) => {
     e.preventDefault();
     console.log('Szukane miasto:', query);
     // Tutaj po podłączeniu backendu wywołaj API pogodowe
+  };
+
+  const handleBlur = () => {
+    // Dodaj timeout żeby klik zdążył się zarejestrować
+    setTimeout(() => setShowSuggestions(false), 100);
   };
 
   return (
@@ -68,18 +76,18 @@ const SearchSection = ({onCitySelect}) => {
           className="search-input"
           value={query}
           onChange={handleInputChange}
+          onBlur={handleBlur}
           required
           autoComplete="off"
         />
       </form>
-      {suggestions.length > 0 && (
+      {showSuggestions && suggestions.length > 0 &&(
         <ul className='suggestions-list'>
           {suggestions.map((city, index) => (
             <li
               key={index}
               onClick={() => handleSelectSuggestion(city)}
-              style={{ padding: '8px 12px', cursor: 'pointer' }}
-              onMouseDown={e => e.preventDefault()} // żeby input nie tracił focusa
+              style={{ padding: '8px 12px', cursor: 'pointer' }} 
             >
               {city}
             </li>

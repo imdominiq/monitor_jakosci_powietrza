@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react';
+import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import LoginPage from './LoginPage';
 import WeatherDashboard from './WeatherDashboard';
+import MetricsDetails from './components/MetricsDetail';
 
 const App = () => {
   const [user, setUser] = useState(null);
@@ -45,13 +47,23 @@ const App = () => {
   if (loading) return <p style={{ textAlign: 'center', marginTop: '2rem' }}>Ładowanie...</p>;
 
   return (
-    <>
-      {user ? (
-        <WeatherDashboard user={user} onLogout={handleLogout} />
-      ) : (
-        <LoginPage onLogin={handleLogin} />
-      )}
-    </>
+    <Router>
+      <Routes>
+        <Route
+          path="/"
+          element={user ? <Navigate to="/dashboard" /> : <LoginPage onLogin={handleLogin} />}
+        />
+        <Route
+          path="/dashboard"
+          element={user ? <WeatherDashboard user={user} onLogout={handleLogout} /> : <Navigate to="/" />}
+        />
+        <Route
+          path="/metrics"
+          element={user ? <MetricsDetails /> : <Navigate to="/" />}
+        />
+        {/* Dodaj 404, jeśli chcesz */}
+      </Routes>
+    </Router>
   );
 };
 
