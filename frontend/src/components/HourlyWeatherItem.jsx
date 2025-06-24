@@ -1,5 +1,4 @@
-import React from 'react'
-import AirQuality from '../ApiDataTest'
+import React from 'react';
 
 export const HourlyWeatherItem = ({ time, icon, temperature }) => {
   return (
@@ -7,7 +6,6 @@ export const HourlyWeatherItem = ({ time, icon, temperature }) => {
       <p className="time">{time}</p>
       <img src={`/${icon}.svg`} alt="ikona pogody" className="weather-icon" />
       <p className="temperature">{temperature}°</p>
-      <AirQuality/>
     </li>
-  )
-}
+  );
+};
