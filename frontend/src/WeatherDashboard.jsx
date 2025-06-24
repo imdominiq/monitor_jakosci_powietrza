@@ -4,8 +4,8 @@ import CurrentWeather from './components/CurrentWeather';
 import AdditionalMetrics from './components/AdditionalMetrics';
 import { HourlyWeatherList } from './components/HourlyWeatherList';
 
-const WeatherDashboard = ({ user, onLogout }) => {
-  const [selectedCity, setSelectedCity] = useState('Warszawa');
+const WeatherDashboard = () => {
+  const [selectedCity, setSelectedCity] = useState('Wrocław');
 
   // Sprawdź, czy użytkownik wcześniej wybrał miasto
   useEffect(() => {
@@ -23,12 +23,6 @@ const WeatherDashboard = ({ user, onLogout }) => {
 
   return (
     <div className="container">
-      <div className="header">
-        <p className="user-name">{user}</p>
-        <button className="logout-button" onClick={onLogout}>Wyloguj się</button>
-      </div>
-
-      <SearchSection onCitySelect={handleCitySelect} />
       
       {/* Nazwa wybranego miasta – widoczna pod searchbarem */}
       <div style={{ textAlign: 'center', marginTop: '10px', color: '#fff', fontSize: '1.2rem' }}>

@@ -1,41 +1,62 @@
 import React, { useEffect, useState } from "react";
+import { useNavigate } from 'react-router-dom';
 
 const AdditionalMetrics = () => {
+  const navigate = useNavigate();
   const [metrics, setMetrics] = useState({
-    wind: "15 km/h",
+    o3: "45 µg/m³",
+    pm10: "60 µg/m³",
+    no2: "25 µg/m³",
     pm25: "34 µg/m³",
     co2: "420 ppm",
   });
 
+
   useEffect(() => {
-    // ✅ TESTOWE DANE - działają bez backendu
+    // ✅ MOCK DATA (until backend is ready)
     const mockMetrics = {
-      wind: "15 km/h",
+      o3: "45 µg/m³",
+      pm10: "60 µg/m³",
+      no2: "25 µg/m³",
       pm25: "34 µg/m³",
       co2: "420 ppm",
     };
     setMetrics(mockMetrics);
 
-    // ✅ BACKEND – odkomentuj, gdy endpoint będzie gotowy:
+    // 🔗 BACKEND – enable when your endpoint is ready:
     /*
     fetch('/api/metrics')
       .then((res) => res.json())
       .then((data) => {
         setMetrics({
-          wind: data.wind,
+          o3: data.o3,
+          pm10: data.pm10,
+          no2: data.no2,
           pm25: data.pm25,
           co2: data.co2,
         });
       })
-      .catch((err) => console.error("Błąd pobierania danych:", err));
+      .catch((err) => console.error("Error fetching metrics:", err));
     */
   }, []);
 
+  const handleClick = () => {
+    navigate('/metrics');  // navigate to detailed metrics page
+  };
+
   return (
-    <div className="additional-metrics">
+    <div className="additional-metrics" onClick={handleClick} style={{ cursor: 'pointer' }}>
       <div className="metric">
-        <h3>Wind</h3>
-        <p>{metrics.wind}</p>
+        <h3>O₃</h3>
+        <p>{metrics.o3}</p>
+      </div>
+      <div className="metric">
+        <h3>PM10</h3>
+        <p>{metrics.pm10}</p>
+      </div>
+      <div className="metric">
+        <h3>NO₂</h3>
+        <p>{metrics.no2}</p>
       </div>
       <div className="metric">
         <h3>PM2.5</h3>
