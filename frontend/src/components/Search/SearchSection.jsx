@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
 
+import styles from './SearchSection.module.css'
+
 const defaultCities = [
   "Poznań",
   "Warszawa",
@@ -59,13 +61,13 @@ const SearchSection = ({onCitySelect}) => {
   };
 
   return (
-    <div className="search-section" style={{ position: 'relative' }}>
-      <form className="search-form" onSubmit={handleCitySearch}>
-        <span className="material-symbols-rounded">search</span>
+    <div className={styles.search_section} style={{ position: 'relative' }}>
+      <form className={styles.search_form} onSubmit={handleCitySearch}>
+        <span className={styles.material_symbols_rounded}>search</span>
         <input
           type="search"
           placeholder="Enter a city name"
-          className="search-input"
+          className={styles.search_input}
           value={query}
           onChange={handleInputChange}
           required
@@ -73,21 +75,21 @@ const SearchSection = ({onCitySelect}) => {
         />
       </form>
       {suggestions.length > 0 && (
-        <ul className='suggestions-list'>
+        <ul className={styles.suggestions_list}>
           {suggestions.map((city, index) => (
             <li
               key={index}
               onClick={() => handleSelectSuggestion(city)}
               style={{ padding: '8px 12px', cursor: 'pointer' }}
-              onMouseDown={e => e.preventDefault()} // żeby input nie tracił focusa
+              onMouseDown={e => e.preventDefault()}
             >
               {city}
             </li>
           ))}
         </ul>
       )}
-      <button className="location-button" type="button">
-        <span className="material-symbols-rounded">my_location</span>
+      <button className={styles.location_button} type="button">
+        <span className={styles.material_symbols_rounded}>Lokalizacja</span>
       </button>
     </div>
   );

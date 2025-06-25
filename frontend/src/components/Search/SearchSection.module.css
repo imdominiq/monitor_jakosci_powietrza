@@ -1,29 +1,29 @@
 
 
-.search-section {
+.search_section {
   display: flex;
   align-items: center; 
   gap: 10px;
   padding: 25px;
 }
 
-.search-section .search-form {
+.search_section .search_form {
   height: 54px;
   width: 100%;
   position: relative;
 }
 
-.search-section .search-form span {
+.search_section .search_form span {
   color: #fff;
-  position: absolute;         /* fixed typo: was 'absolue' */
+  position: absolute;
   top: 50%;
-  left: 16px;                 /* positions the icon to the left inside input */
+  left: 16px;
   transform: translateY(-50%);
-  font-size: 24px;            /* optional: to size the icon */
-  pointer-events: none;       /* so clicking the icon doesn’t block input */
+  font-size: 24px;
+  pointer-events: none;
 }
 
-.search-section .search-input {
+.search_section .search_input {
   width: 100%;
   height: 100%;
   outline: none; 
@@ -33,19 +33,19 @@
   padding: 0 20px 0 50px;
   background: rgba(255, 255, 255, 0.05);
   border: 1px solid rgba(255, 255, 255, 0.25);
-  tansition: 0.1s ease; 
+  transition: 0.1s ease; 
 }
 
-.search-section .search-input:focus {
+.search_section .search_input:focus {
   border-color: #a38cd9;
 }
 
-.search-section .search-input::placeholder {
+.search_section .search_input::placeholder {
   color: #ddd;
   text-transform: none;
 }
 
-.search-section .location-button {
+.search_section .location_button {
   height: 54px; 
   width: 56px;
   display: flex; 
@@ -60,15 +60,14 @@
   transition: 0.2s ease; 
 }
 
-.search-section .location-button:hover {
+.search_section .location_button:hover {
   color: #b39fdf;
   border-color: #a38cd9;
 }
 
-/* Nowy styl dla listy sugestii */
-.search-section .suggestions-list {
+.search_section .suggestions_list {
   position: absolute;
-  top: 80px; /* dokładnie pod inputem */
+  top: 80px;
   left: 0;
   right: 0;
   background-color: rgba(255, 255, 255, 0.1);
@@ -83,12 +82,12 @@
   z-index: 100;
 }
 
-.search-section .suggestions-list li {
+.search_section .suggestions_list li {
   padding: 10px 20px;
   cursor: pointer;
   transition: background-color 0.2s ease;
 }
 
-.search-section .suggestions-list li:hover {
+.search_section .suggestions_list li:hover {
   background-color: rgba(163, 140, 217, 0.4);
 }
