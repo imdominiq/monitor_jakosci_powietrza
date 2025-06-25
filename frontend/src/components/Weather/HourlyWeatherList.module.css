@@ -1,0 +1,20 @@
+.current_weather .weather_icon {
+  width: 140px;
+  aspect-ratio: 1;
+}
+
+.current_weather .temperature {
+  margin: 18px 0;
+  display: flex;
+  font-size: 3.4rem
+}
+
+.current_weather .temperature span {
+  font-size: 1.6rem;
+  font-weight: 400;
+  margin: 5px 0 0 2px;
+}
+
+.current_weather .description {
+  font-size: 1.25rem;
+}

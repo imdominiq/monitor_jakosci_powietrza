@@ -1,0 +1,71 @@
+.container {
+  position: relative;
+  margin: 0 auto; 
+  overflow: hidden;
+  z-index: 1;
+  max-width: 90%;
+  border-radius: 10px; 
+  background: linear-gradient(#352163, #33143C);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+}
+
+.container::after {
+  content: "";
+  position: absolute; 
+  z-index: -1;
+  opacity: 0.7;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background: url("bg.png");
+}
+
+.weather_section :where(h2, p) {
+  color: #fff;
+}
+
+.weather_section .current_weather {
+  display: flex; 
+  flex-direction: column; 
+  align-items: center;
+  padding: 20px 0 50px
+}
+
+.hourly_forcast {
+  padding: 16px 25px;
+  border-top: 1px solid rgba(255, 255, 255, 0.25);
+}
+
+
+.hourly_forcast .weather_list {
+  display: flex;
+  list-style: none;
+  flex-direction: row;
+  gap: 34px;
+  overflow-x: auto;
+  scrollbar-width: thin; 
+  padding-bottom: 16px;
+  margin-bottom: -16px;
+  scrollbar-color: transparent transparent;
+}
+
+.hourly_forcast:hover .weather_list {
+  scrollbar-color: #c5bcdb transparent;
+}
+
+.hourly_forcast .weather_item {
+  display: flex; 
+  gap: 7px; 
+  flex-direction: column; 
+  align-items: center;
+}
+
+.hourly_forcast .weather_item .weather_icon {
+  width: 28px;
+  aspect-ratio: 1;
+}
+
+.city {
+  color: white;
+}

@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
-import LoginPage from './LoginPage';
-import WeatherDashboard from './WeatherDashboard';
-import MetricsDetails from './components/MetricsDetail';
+import LoginPage from './Login/LoginPage';
+import WeatherDashboard from './Dashboard/WeatherDashboard';
+import MetricsDetails from './components/Metrics/MetricsDetail';
 
 const App = () => {
   const [user, setUser] = useState(null);
@@ -61,7 +61,6 @@ const App = () => {
           path="/metrics"
           element={user ? <MetricsDetails /> : <Navigate to="/" />}
         />
-        {/* Dodaj 404, jeśli chcesz */}
       </Routes>
     </Router>
   );
