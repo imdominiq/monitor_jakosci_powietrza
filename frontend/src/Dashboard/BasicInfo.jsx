@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { API_URL } from '../config';
 
 import styles from './BasicInfo.module.css';
 
@@ -10,7 +11,7 @@ const BasicInfo = ({ lat = 51.1079, lon = 17.0385 }) => {
   useEffect(() => {
     const fetchBasicInfo = async () => {
       try {
-        const response = await fetch(`http://localhost:3001/api/air?lat=${lat}&lon=${lon}`);
+        const response = await fetch(`${API_URL}/api/air?lat=${lat}&lon=${lon}`);
         if (!response.ok) {
           throw new Error(`Błąd serwera: ${response.status}`);
         }
