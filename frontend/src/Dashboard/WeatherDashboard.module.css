@@ -48,6 +48,7 @@
   padding-bottom: 16px;
   margin-bottom: -16px;
   scrollbar-color: transparent transparent;
+  height: 18rem;
 }
 
 .hourly_forcast:hover .weather_list {

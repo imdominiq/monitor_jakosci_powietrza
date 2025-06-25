@@ -12,6 +12,7 @@ const BasicInfo = ({ lat = 51.1079, lon = 17.0385 }) => {
     const fetchBasicInfo = async () => {
       try {
         const response = await fetch(`${API_URL}/api/air?lat=${lat}&lon=${lon}`);
+        console.log(response)
         if (!response.ok) {
           throw new Error(`Błąd serwera: ${response.status}`);
         }

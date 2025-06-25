@@ -63,10 +63,9 @@ const SearchSection = ({onCitySelect}) => {
   return (
     <div className={styles.search_section} style={{ position: 'relative' }}>
       <form className={styles.search_form} onSubmit={handleCitySearch}>
-        <span className={styles.material_symbols_rounded}>search</span>
         <input
           type="search"
-          placeholder="Enter a city name"
+          placeholder="Wyszukaj miasto..."
           className={styles.search_input}
           value={query}
           onChange={handleInputChange}
@@ -89,7 +88,7 @@ const SearchSection = ({onCitySelect}) => {
         </ul>
       )}
       <button className={styles.location_button} type="button">
-        <span className={styles.material_symbols_rounded}>Lokalizacja</span>
+        <span className={styles.material_symbols_rounded}>Szukaj</span>
       </button>
     </div>
   );

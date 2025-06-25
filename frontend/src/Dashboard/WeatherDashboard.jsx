@@ -6,6 +6,8 @@ import { HourlyWeatherList } from '../components/Weather/HourlyWeatherList';
 
 import styles from './WeatherDashboard.module.css'
 import BasicInfo from './BasicInfo';
+import AddFavorite from '../components/Faviourite/AddFavourite';
+import FavoritesList from '../components/Faviourite/FavoritesList';
 
 const WeatherDashboard = () => {
   const [selectedCity, setSelectedCity] = useState('Wrocław');
@@ -27,13 +29,14 @@ const WeatherDashboard = () => {
       <BasicInfo />
 
       <div className={styles.weather_section}>
-        <SearchSection />
-        <CurrentWeather city={selectedCity} />
-        <AdditionalMetrics city={selectedCity} />
+          <SearchSection />
+          {/* <CurrentWeather city={selectedCity} /> */}
+          <AdditionalMetrics city={selectedCity} />
         <div className={styles.hourly_forcast}>
-          <ul className={styles.weather_list}>
-            <HourlyWeatherList city={selectedCity} />
-          </ul>
+          <AddFavorite />
+        </div>
+        <div className={styles.hourly_forcast}>
+          <FavoritesList userId={1} />
         </div>
       </div>
     </div>

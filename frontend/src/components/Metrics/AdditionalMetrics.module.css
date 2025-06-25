@@ -11,6 +11,8 @@
   color: #fff;
   scrollbar-width: thin;
   scrollbar-color: transparent transparent;
+  justify-content: center;
+  align-items: center;
 }
 
 .additional_metrics:hover{

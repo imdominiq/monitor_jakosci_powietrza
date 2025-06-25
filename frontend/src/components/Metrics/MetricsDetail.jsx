@@ -11,7 +11,6 @@ const MetricsDetails = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    // MOCK danych historycznych (14 dni)
     setHistoryData([
       { date: '2025-06-03', pm25: 27, pm10: 50 },
       { date: '2025-06-04', pm25: 29, pm10: 52 },
@@ -35,7 +34,6 @@ const MetricsDetails = () => {
   };
 
   useEffect(() => {
-    // ⏩ Automatycznie scrollujemy na prawo (najnowsze dane)
     if (scrollContainerRef.current) {
       scrollContainerRef.current.scrollLeft = scrollContainerRef.current.scrollWidth;
     }
