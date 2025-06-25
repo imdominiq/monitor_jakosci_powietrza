@@ -39,7 +39,7 @@ const CurrentWeather = ({ city }) => {
   if (!weather) return <p>Ładowanie danych pogodowych...</p>;
 
   return (
-    <div className={styles.current_weather}>
+    <div className={styles.container}>
       <img src={`/${weather.icon}.svg`} alt="ikona pogody" className={styles.weather_icon} />
       <h2 className={styles.temperature}>
         {weather.temperature} <span>°C</span>

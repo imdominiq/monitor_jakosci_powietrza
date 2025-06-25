@@ -1,27 +1,28 @@
-.additional-metrics {
+.additional_metrics {
   display: flex;
-  flex-wrap: nowrap;       /* prevent wrapping to new line */
+  flex-wrap: nowrap;
   gap: 20px;
-  max-width: 100%;         /* or set fixed width like 300px */
-  overflow-x: auto;        /* enable horizontal scrolling */
+  max-width: 100%;
+  overflow-x: auto;
   padding: 16px;
   margin: 0 auto 20px;
   border-radius: 10px;
   background: rgba(255, 255, 255, 0.08);
   color: #fff;
-  scrollbar-width: thin;   /* Firefox scrollbar style */
+  scrollbar-width: thin;
   scrollbar-color: transparent transparent;
 }
 
-.additional-metrics:hover{
+.additional_metrics:hover{
   scrollbar-color: #c5bcdb transparent;
 }
 
-.additional-metrics .metric {
-  flex: 0 0 auto; /* fix item width, no shrinking */
+.additional_metrics .metric {
+  flex: 0 0 auto;
   min-width: 100px;
   text-align: center;
   padding: 10px;
   background: rgba(255, 255, 255, 0.12);
   border-radius: 6px;
+  cursor: pointer;
 }

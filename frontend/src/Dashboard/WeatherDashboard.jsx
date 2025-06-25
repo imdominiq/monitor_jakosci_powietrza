@@ -22,8 +22,9 @@ const WeatherDashboard = () => {
       
       <div className={styles.city}>
         {selectedCity && <h2><strong>{selectedCity}</strong></h2>}
-        <BasicInfo />
       </div>
+
+      <BasicInfo />
 
       <div className={styles.weather_section}>
         <CurrentWeather city={selectedCity} />

@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from 'react-router-dom';
 
+import styles from './AdditionalMetrics.module.css'
+
 const AdditionalMetrics = () => {
   const navigate = useNavigate();
   const [metrics, setMetrics] = useState({
@@ -45,24 +47,24 @@ const AdditionalMetrics = () => {
   };
 
   return (
-    <div className="additional-metrics" onClick={handleClick} style={{ cursor: 'pointer' }}>
-      <div className="metric">
+    <div className={styles.additional_metrics} onClick={handleClick}>
+      <div className={styles.metric}>
         <h3>O₃</h3>
         <p>{metrics.o3}</p>
       </div>
-      <div className="metric">
+      <div className={styles.metric}>
         <h3>PM10</h3>
         <p>{metrics.pm10}</p>
       </div>
-      <div className="metric">
+      <div className={styles.metric}>
         <h3>NO₂</h3>
         <p>{metrics.no2}</p>
       </div>
-      <div className="metric">
+      <div className={styles.metric}>
         <h3>PM2.5</h3>
         <p>{metrics.pm25}</p>
       </div>
-      <div className="metric">
+      <div className={styles.metric}>
         <h3>CO₂</h3>
         <p>{metrics.co2}</p>
       </div>
