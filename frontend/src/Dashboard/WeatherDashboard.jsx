@@ -5,6 +5,7 @@ import AdditionalMetrics from '../components/Metrics/AdditionalMetrics';
 import { HourlyWeatherList } from '../components/Weather/HourlyWeatherList';
 
 import styles from './WeatherDashboard.module.css'
+import BasicInfo from './BasicInfo';
 
 const WeatherDashboard = () => {
   const [selectedCity, setSelectedCity] = useState('Wrocław');
@@ -21,6 +22,7 @@ const WeatherDashboard = () => {
       
       <div className={styles.city}>
         {selectedCity && <h2><strong>{selectedCity}</strong></h2>}
+        <BasicInfo />
       </div>
 
       <div className={styles.weather_section}>
