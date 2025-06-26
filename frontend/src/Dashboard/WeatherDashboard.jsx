@@ -36,7 +36,7 @@ const WeatherDashboard = () => {
           <AddFavorite />
         </div>
         <div className={styles.hourly_forcast}>
-          <FavoritesList userId={1} />
+          <FavoritesList userId={'c8c6f93d-e30a-4f85-a28d-2c0f0e949fe9'} />
         </div>
       </div>
     </div>

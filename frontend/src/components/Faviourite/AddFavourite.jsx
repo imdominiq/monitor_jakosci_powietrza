@@ -14,17 +14,33 @@ const AddFavoriteForm = ({ onSuccess }) => {
 
     try {
       const token = localStorage.getItem('supabase_token');
+
+      const payload = {
+        user_id: 'c8c6f93d-e30a-4f85-a28d-2c0f0e949fe9',
+        city,
+        lat: parseFloat(lat),
+        lon: parseFloat(lon),
+      };
+
       const res = await fetch(`${API_URL}/api/favorites`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
           'Authorization': `Bearer ${token}`,
         },
-        body: JSON.stringify({ city, lat: parseFloat(lat), lon: parseFloat(lon) }),
+        body: JSON.stringify(payload),
       });
 
       if (!res.ok) {
-        throw new Error('Nie udało się dodać lokalizacji');
+        const text = await res.text();
+        let errorMessage = 'Nie udało się dodać lokalizacji';
+        try {
+          const errorData = JSON.parse(text);
+          errorMessage = errorData.error || errorMessage;
+        } catch {
+          if (text) errorMessage = text;
+        }
+        throw new Error(errorMessage);
       }
 
       setMessage('✅ Lokalizacja dodana do ulubionych!');
