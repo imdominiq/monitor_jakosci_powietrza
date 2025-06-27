@@ -85,7 +85,7 @@ const FavoritesList = ({ userId }) => {
     <div className={styles.container}>
       <h2 className={styles.title}>Twoje ulubione lokalizacje</h2>
       <ul className={styles.list}>
-        {favorites.map(({ id, city, pm25, pm10 }) => (
+        {favorites.map(({ id, city, pm25, pm10, created_at }) => (
           <li key={id} className={styles.item}>
             <div className={styles.header}>
               {editId === id ? (
@@ -136,6 +136,7 @@ const FavoritesList = ({ userId }) => {
             <div className={styles.values}>
               <span>PM2.5: {pm25 !== null ? `${pm25} µg/m³` : 'brak danych'}</span>
               <span>PM10: {pm10 !== null ? `${pm10} µg/m³` : 'brak danych'}</span>
+              <span>Pomiar: {created_at ? new Date(created_at).toLocaleString() : 'brak daty'}</span>
             </div>
           </li>
         ))}
