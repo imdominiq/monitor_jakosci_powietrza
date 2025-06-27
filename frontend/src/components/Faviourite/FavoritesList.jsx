@@ -13,9 +13,10 @@ const FavoritesList = ({ userId }) => {
 
     const fetchFavorites = async () => {
       try {
-        const response = await fetch(`http://localhost:3001/api/favorites/${userId}`);
+        const response = await fetch(`http://localhost:3001/api/favorites/all`);
         if (!response.ok) throw new Error(`Błąd serwera: ${response.status}`);
         const data = await response.json();
+        console.log(data)
         setFavorites(data);
       } catch (err) {
         setError(err.message || 'Błąd podczas pobierania ulubionych');

@@ -26,6 +26,7 @@
   color: #fff;
   outline: none;
   transition: border-color 0.2s ease;
+  width: 100%;
 }
 
 .input:focus {
@@ -51,4 +52,40 @@
   text-align: center;
   color: #eee;
   font-size: 0.95rem;
+}
+
+.suggestionsList {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  background: white;
+  border: 1px solid #ddd;
+  max-height: 200px;
+  overflow-y: auto;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  z-index: 1000;
+  cursor: pointer;
+}
+
+.suggestionItem {
+  padding: 8px 12px;
+}
+
+.suggestionItem:hover {
+  background-color: #eee;
+}
+
+.suggestionsLoading {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  padding: 8px 12px;
+  background: white;
+  border: 1px solid #ddd;
+  z-index: 1000;
+  font-size: 14px;
+  color: #666;
 }

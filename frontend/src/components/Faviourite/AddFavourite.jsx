@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { API_URL } from '../../config';
 import styles from './AddFavoriteForm.module.css';
 
@@ -7,6 +7,64 @@ const AddFavoriteForm = ({ onSuccess }) => {
   const [lat, setLat] = useState('');
   const [lon, setLon] = useState('');
   const [message, setMessage] = useState('');
+  const [suggestions, setSuggestions] = useState([]);
+  const [loadingSuggestions, setLoadingSuggestions] = useState(false);
+  const [showSuggestions, setShowSuggestions] = useState(false);
+
+  const inputRef = useRef(null);
+
+  useEffect(() => {
+    if (city.length < 2) {
+      setSuggestions([]);
+      return;
+    }
+
+    const controller = new AbortController();
+
+    const fetchSuggestions = async () => {
+      setLoadingSuggestions(true);
+      try {
+        const response = await fetch(
+          `https://api.opencagedata.com/geocode/v1/json?q=${encodeURIComponent(city)}&key=044d8a50e692433ea93a4011c40b0adc&limit=5`,
+          { signal: controller.signal }
+        );
+        const result = await response.json();
+
+        if (result.results) {
+          setSuggestions(
+            result.results.map((item) => ({
+              city: item.formatted,
+              lat: item.geometry.lat,
+              lon: item.geometry.lng,
+            }))
+          );
+          setShowSuggestions(true);
+        }
+      } catch (err) {
+        if (err.name !== 'AbortError') {
+          setMessage('Błąd pobierania podpowiedzi');
+        }
+      } finally {
+        setLoadingSuggestions(false);
+      }
+    };
+
+    // Debounce 300ms
+    const debounceId = setTimeout(fetchSuggestions, 300);
+
+    return () => {
+      clearTimeout(debounceId);
+      controller.abort();
+    };
+  }, [city]);
+
+  const handleSuggestionClick = (suggestion) => {
+    setCity(suggestion.city);
+    setLat(suggestion.lat.toFixed(6));
+    setLon(suggestion.lon.toFixed(6));
+    setShowSuggestions(false);
+    setSuggestions([]);
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -54,17 +112,36 @@ const AddFavoriteForm = ({ onSuccess }) => {
   };
 
   return (
-    <form className={styles.form} onSubmit={handleSubmit}>
+    <form className={styles.form} onSubmit={handleSubmit} autoComplete="off">
       <h3 className={styles.heading}>Dodaj lokalizację do ulubionych</h3>
 
-      <input
-        className={styles.input}
-        type="text"
-        placeholder="Miasto"
-        value={city}
-        onChange={(e) => setCity(e.target.value)}
-        required
-      />
+      <div style={{ position: 'relative' }}>
+        <input
+          className={styles.input}
+          type="text"
+          placeholder="Miasto"
+          value={city}
+          onChange={(e) => setCity(e.target.value)}
+          onFocus={() => { if (suggestions.length) setShowSuggestions(true); }}
+          ref={inputRef}
+          required
+        />
+        {loadingSuggestions && <div className={styles.suggestionsLoading}>Ładowanie...</div>}
+        {showSuggestions && suggestions.length > 0 && (
+          <ul className={styles.suggestionsList}>
+            {suggestions.map((sugg, idx) => (
+              <li
+                key={idx}
+                className={styles.suggestionItem}
+                onClick={() => handleSuggestionClick(sugg)}
+              >
+                {sugg.city}
+              </li>
+            ))}
+          </ul>
+        )}
+      </div>
+
       <input
         className={styles.input}
         type="number"

@@ -4,18 +4,17 @@ const { supabase } = require('../supabaseClient');
 
 router.get('/all', async (req, res) => {
   try {
-    const { data, error } = await supabase
-      .from('favorites')
-      .select('*');
+    const { data, error } = await supabase.rpc('get_favorites_with_latest_measurements');
 
     if (error) throw error;
 
     res.status(200).json(data);
   } catch (err) {
-    console.error('❌ Błąd pobierania favorites:', err.message);
+    console.error('❌ Błąd pobierania favorites + pomiary:', err.message);
     res.status(500).json({ error: err.message });
   }
 });
+
 
 router.get('/:userId', async (req, res) => {
   const { userId } = req.params;
