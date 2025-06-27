@@ -8,6 +8,7 @@ import styles from './WeatherDashboard.module.css'
 import BasicInfo from './BasicInfo';
 import AddFavorite from '../components/Faviourite/AddFavourite';
 import FavoritesList from '../components/Faviourite/FavoritesList';
+import ListMQTT from '../components/Faviourite/ListMQTT';
 
 const WeatherDashboard = () => {
   const [selectedCity, setSelectedCity] = useState('Wrocław');
@@ -37,6 +38,9 @@ const WeatherDashboard = () => {
         </div>
         <div className={styles.hourly_forcast}>
           <FavoritesList userId={'c8c6f93d-e30a-4f85-a28d-2c0f0e949fe9'} />
+        </div>
+        <div>
+          <ListMQTT />
         </div>
       </div>
     </div>
