@@ -1,0 +1,14 @@
+{
+  "bindings": [
+    {
+      "type": "eventHubTrigger",
+      "name": "eventHubMessages",
+      "direction": "in",
+      "eventHubName": "monitor-sensor",
+      "connection": "EventHubConnectionAppSetting",
+      "cardinality": "many",
+      "consumerGroup": "$Default"
+    }
+  ],
+  "scriptFile": "index.js"
+}
