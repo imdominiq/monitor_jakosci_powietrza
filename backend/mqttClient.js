@@ -1,27 +1,25 @@
 const mqtt = require('mqtt');
 
-const client = mqtt.connect('mqtt://localhost:1883');
+const deviceId = 'sensor-01';
+const iotHubHostname = 'iot-hub-cdv.azure-devices.net';
+const primaryKey = 'Xc+IIi7uUyx/uZyR8Pz1yNgdwIbdhWrgZMPMAnJOrpQ=';
+
+const client = mqtt.connect(`mqtts://${iotHubHostname}`, {
+  clientId: deviceId,
+  username: `${iotHubHostname}/${deviceId}/?api-version=2021-04-12`,
+  password: primaryKey,
+  protocolId: 'MQTT',
+  protocolVersion: 4
+});
 
 client.on('connect', () => {
-  console.log('📡 Połączono z brokerem MQTT');
-  client.subscribe('air/measurements', (err) => {
-    if (err) console.error('❌ Błąd subskrypcji:', err);
-  });
+  console.log('✅ Połączono z Azure IoT Hub');
+  setInterval(() => {
+    const payload = {
+      temperature: (Math.random() * 10 + 20).toFixed(2),
+      timestamp: new Date().toISOString()
+    };
+    client.publish(`devices/${deviceId}/messages/events/`, JSON.stringify(payload));
+    console.log('📤 Wysłano dane:', payload);
+  }, 10000); // co 10 sekund
 });
-
-client.on('message', async (topic, message) => {
-  try {
-    const payload = JSON.parse(message.toString());
-    console.log('📨 Odebrano dane:', payload);
-
-    // Przykład: zapis do Supabase
-    const { createClient } = require('@supabase/supabase-js');
-    const supabase = createClient(process.env.SUPABASE_URL, process.env.SUPABASE_KEY);
-
-    await supabase.from('measurements').insert([payload]);
-  } catch (err) {
-    console.error('❌ Błąd przetwarzania wiadomości:', err);
-  }
-});
-
-module.exports = client;
