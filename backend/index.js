@@ -18,6 +18,11 @@ app.get('/api/data', async (req, res) => {
   }
 });
 
+app.get('/test', (req, res) => {
+  res.send('API działa!');
+});
+
+
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
   console.log(`Serwer działa na porcie ${PORT}`);
