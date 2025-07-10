@@ -30,7 +30,7 @@ const WeatherDashboard = () => {
       <BasicInfo />
 
       <div className={styles.weather_section}>
-          <SearchSection />
+          <SearchSection/>
           {/* <CurrentWeather city={selectedCity} /> */}
           <AdditionalMetrics city={selectedCity} />
         <div className={styles.hourly_forcast}>
