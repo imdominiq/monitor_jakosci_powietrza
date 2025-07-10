@@ -2,8 +2,9 @@ import cron from 'node-cron';
 import { getLatestJsonBlobs } from './azureBlob.js';
 import { pool } from './db.js';
 
-cron.schedule('*/5 * * *', async () => {
-  console.log('[CRON] Start checking blobs...');
+cron.schedule('*/5 * * * *', async () => {
+  console.log('Cron działa co 5 minut');
+
 
   try {
     const measurements = await getLatestJsonBlobs();
