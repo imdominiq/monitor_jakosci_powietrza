@@ -20,9 +20,11 @@ app.get('/api/data', async (req, res) => {
 });
 
 app.post('/api/send/data', async (req, res) => {
-  console.log('Otrzymane dane:', req.body);
+  console.log('Cały req.body:', req.body);
 
   const { device_id, timestamp, temperature, humidity, pm25 } = req.body;
+
+  console.log('Destrukturyzowane:', { device_id, timestamp, temperature, humidity, pm25 });
 
   try {
     const temperatureNum = parseFloat(temperature);
