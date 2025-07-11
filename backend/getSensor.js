@@ -1,7 +1,7 @@
 import { Client, Message } from 'azure-iot-device';
 import { Mqtt } from 'azure-iot-device-mqtt';
 
-const connectionString = 'HostName=iothubcdv.azure-devices.net;DeviceId=sensor-01;SharedAccessKey=EfgoAbqTpiP0sw21R+wKn/lhHs+NRhvhni9Vvf7ukQQ=';
+const connectionString = 'HostName=iothubcdvpaid.azure-devices.net;DeviceId=sensor-02;SharedAccessKey=3VeArR+adsn/ZEdwNSyA7Fhn7u88Dr09dJ7xNcQI910=';
 
 const client = Client.fromConnectionString(connectionString, Mqtt);
 
