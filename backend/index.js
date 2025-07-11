@@ -26,11 +26,16 @@ app.post('/api/send/data', async (req, res) => {
   // }
   
   try {
+    const temperatureNum = parseFloat(temperature);
+    const humidityNum = parseFloat(humidity);
+    const pm25Num = parseFloat(pm25);
+
     await pool.query(
       `INSERT INTO measurements (device_id, timestamp, temperature, humidity, pm25)
-       VALUES ($1, $2, $3, $4, $5)`,
-      [device_id, timestamp, temperature, humidity, pm25]
+      VALUES ($1, $2, $3, $4, $5)`,
+      [device_id, timestamp, temperatureNum, humidityNum, pm25Num]
     );
+    
     res.status(201).send('Pomiary zapisane');
   } catch (err) {
     console.error(err);
