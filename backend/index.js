@@ -20,26 +20,27 @@ app.get('/api/data', async (req, res) => {
 });
 
 app.post('/api/send/data', async (req, res) => {
+  console.log('Otrzymane dane:', req.body);
+
   const { device_id, timestamp, temperature, humidity, pm25 } = req.body;
-  // if (!device_id || !timestamp) {
-  //   return res.status(400).send('Brak wymaganych danych');
-  // }
-  
+
   try {
     const temperatureNum = parseFloat(temperature);
     const humidityNum = parseFloat(humidity);
     const pm25Num = parseFloat(pm25);
+
+    console.log({ device_id, timestamp, temperatureNum, humidityNum, pm25Num });
 
     await pool.query(
       `INSERT INTO measurements (device_id, timestamp, temperature, humidity, pm25)
       VALUES ($1, $2, $3, $4, $5)`,
       [device_id, timestamp, temperatureNum, humidityNum, pm25Num]
     );
-    
+
     res.status(201).send('Pomiary zapisane');
   } catch (err) {
-    console.error(err);
-    res.status(500).send('Błąd serwera');
+    console.error('Błąd zapytania:', err);
+    res.status(500).send(`Błąd serwera: ${err.message}`);
   }
 });
 
