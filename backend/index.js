@@ -21,9 +21,9 @@ app.get('/api/data', async (req, res) => {
 
 app.post('/api/send/data', async (req, res) => {
   const { device_id, timestamp, temperature, humidity, pm25 } = req.body;
-  if (!device_id || !timestamp) {
-    return res.status(400).send('Brak wymaganych danych');
-  }
+  // if (!device_id || !timestamp) {
+  //   return res.status(400).send('Brak wymaganych danych');
+  // }
   
   try {
     await pool.query(
