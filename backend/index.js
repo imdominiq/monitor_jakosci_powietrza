@@ -5,6 +5,7 @@ import './cron.js';
 
 dotenv.config();
 const app = express();
+app.use(express.json());
 
 app.get('/api/data', async (req, res) => {
   try {
@@ -14,6 +15,25 @@ app.get('/api/data', async (req, res) => {
     res.json(result.rows);
   } catch (err) {
     console.error(err.message);
+    res.status(500).send('Błąd serwera');
+  }
+});
+
+app.post('/api/send/data', async (req, res) => {
+  const { device_id, timestamp, temperature, humidity, pm25 } = req.body;
+  if (!device_id || !timestamp) {
+    return res.status(400).send('Brak wymaganych danych');
+  }
+  
+  try {
+    await pool.query(
+      `INSERT INTO measurements (device_id, timestamp, temperature, humidity, pm25)
+       VALUES ($1, $2, $3, $4, $5)`,
+      [device_id, timestamp, temperature, humidity, pm25]
+    );
+    res.status(201).send('Pomiary zapisane');
+  } catch (err) {
+    console.error(err);
     res.status(500).send('Błąd serwera');
   }
 });
